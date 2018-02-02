@@ -53,19 +53,6 @@ mNqn2Wg7tSToJhvHcqfzLMU6J4mkOImSPTxVZAdo+lcPlk+GhZmYgACEe0x35K7YzW1zJ7XyJV/TT1Mr
         }
       };
 
-      // create the custom Maker icon
-      var testMarkerPink = L.AwesomeMarkers.icon({
-        icon: 'play',
-        markerColor: 'pink'
-      });
-
-      // and add it to the map
-       L.geoJSON(geojsonFeature, {
-        pointToLayer: function (feature, latlng) {
-          return L.marker(latlng, {icon:testMarkerPink});
-        }
-      }).addTo(mymap).bindPopup("<b>"+geojsonFeature.properties.name+""+geojsonFeature.properties.popupContent+"<b>");
-
       // create a custom popup
       var popup = L.popup();
 
@@ -81,6 +68,20 @@ mNqn2Wg7tSToJhvHcqfzLMU6J4mkOImSPTxVZAdo+lcPlk+GhZmYgACEe0x35K7YzW1zJ7XyJV/TT1Mr
 
       // add the click event detector to the map
       mymap.on('click', onMapClick)
+
+      // create the custom Maker icon
+      var testMarkerPink = L.AwesomeMarkers.icon({
+        icon: 'play',
+        markerColor: 'pink'
+      });
+
+      // and add it to the map
+       L.geoJSON(geojsonFeature, {
+        pointToLayer: function (feature, latlng) {
+          return L.marker(latlng, {icon:testMarkerPink});
+        }
+      }).addTo(mymap).bindPopup("<b>"+geojsonFeature.properties.name+""+geojsonFeature.properties.popupContent+"<b>");
+      
       </script>
 </body>
 </html>
