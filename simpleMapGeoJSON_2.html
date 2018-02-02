@@ -60,7 +60,11 @@ mNqn2Wg7tSToJhvHcqfzLMU6J4mkOImSPTxVZAdo+lcPlk+GhZmYgACEe0x35K7YzW1zJ7XyJV/TT1Mr
       };
 
       // and add it to the map
-      L.geoJSON(geojsonFeature).addTo(mymap).bindPopup("<b>"+geojsonFeature.properties.name+""+geojsonFeature.properties.popupContent+"<b>");
+      L.geoJSON(geojsonFeature).L.geoJSON(geojsonFeature, {
+        pointToLayer: function (feature, latlng) {
+          return L.marker(latlng, {icon:testMarkerPink});
+        }
+      }).addTo(mymap).bindPopup("<b>"+geojsonFeature.properties.name+""+geojsonFeature.properties.popupContent+"<b>");
 
       // create a custom popup
       var popup = L.popup();
