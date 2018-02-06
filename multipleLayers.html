@@ -39,8 +39,12 @@ mNqn2Wg7tSToJhvHcqfzLMU6J4mkOImSPTxVZAdo+lcPlk+GhZmYgACEe0x35K7YzW1zJ7XyJV/TT1Mr
         earthquakelayer = L.geoJson(earthquakejson).addTo(mymap);// add the JSON layer onto the map
         mymap.fitBounds(earthquakelayer.getBounds());// change the map zoom so that all the data is shown
         }
+      function removeEarthquakeData() {
+        alert("Earthquake data will be removed");
+        mymap.removeLayer( earthquakelayer );
+      }
       </script>
-      
+
       <!-- the following CSS is used to set the size of the Map -->
       <style type="text/css">
                #mapid { height: 180px; }
@@ -49,8 +53,10 @@ mNqn2Wg7tSToJhvHcqfzLMU6J4mkOImSPTxVZAdo+lcPlk+GhZmYgACEe0x35K7YzW1zJ7XyJV/TT1Mr
 <body>
       <!-- the mapid div will hold the map -->
       <div id="mapid" style="width: 600px; height: 400px;"></div>
-      <!-- add a button under the map -->
+      <!-- add a button to load data -->
       <button id="loadData" name="loadData" onclick="loadEarthquakeData()">Click here to load the data </button>
+      <!-- add a button to remove data-->
+      <button id="removeEarthquakeData" name="removeEarthquakeData" onclick="removeEarthquakeData()">Click here to remove the Earthquake data </button>
 
       <!-- the following script will load the map and set the default view and zoom, as well as loading the basemap tiles -->
       <script>
