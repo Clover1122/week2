@@ -12,13 +12,35 @@ mNqn2Wg7tSToJhvHcqfzLMU6J4mkOImSPTxVZAdo+lcPlk+GhZmYgACEe0x35K7YzW1zJ7XyJV/TT1Mr
 "
       crossorigin=""></script>
 
-      <script>
-      // load data when click on the button
+      <script >
       function loadEarthquakeData() {
-        alert("load the data here");
+        alert("Loading Earthquakes");
+        getEarthquakes();// call the getEarthquakes code
       }
+      // create a variable that will hold the XMLHttpRequest()
+      var client;
+      // create the code to get the Earthquakes data using an XMLHttpRequest
+      function getEarthquakes() {
+        client = new XMLHttpRequest();
+        client.open('GET','https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson');
+        client.onreadystatechange = earthquakeResponse; 
+        client.send();
+      }
+      // create the code to wait for the response from the data server, and process the response once it is received
+      function earthquakeResponse() {
+        if (client.readyState == 4) {
+          var earthquakedata = client.responseText;
+          loadEarthquakelayer(earthquakedata);
+        }
+      }
+      // convert the received data - which is text - to JSON format and add it to the map
+      function loadEarthquakelayer(earthquakedata) {
+        var earthquakejson = JSON.parse(earthquakedata);
+        earthquakelayer = L.geoJson(earthquakejson).addTo(mymap);// add the JSON layer onto the map
+        mymap.fitBounds(earthquakelayer.getBounds());// change the map zoom so that all the data is shown
+        }
       </script>
-
+      
       <!-- the following CSS is used to set the size of the Map -->
       <style type="text/css">
                #mapid { height: 180px; }
